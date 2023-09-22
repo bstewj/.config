@@ -1,0 +1,1 @@
+return { path = "/home/dmne", documents = {["views"]={[1]={["module"]="core.emptyview",["type"]="view",["active"]=true,["scroll"]={["x"]=0,["y"]=0,["to"]={["y"]=0,["x"]=0}}}},["active_view"]=1,["type"]="leaf"}, directories = {} }

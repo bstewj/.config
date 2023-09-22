@@ -1,0 +1,7 @@
+Threshold = 88
+DisplayMonitorSources = true
+EnableUpdates = true
+FilterInput = true
+FilterOutput = false
+LastUsedInput = "alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.analog-mono"
+LastUsedOutput = ""
