@@ -1,0 +1,304 @@
+* {
+  font-size: 13px;
+  font-family: "Ubuntu Nerd Font";
+  /* font-weight: 700; */
+}
+
+window#waybar {
+    background: #1f2335;
+    color: #c1c1c1;
+    
+}
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+#tags button {
+    padding: 0px;
+    /* padding: 0 0px; */
+    border-radius: 80px;
+    background:#1f2335;
+    color: #ffffff;
+    text-decoration: underline; 
+}
+
+#tags button.occupied {
+    background:#545c7e;
+    color:  #029aff;
+    box-shadow: inset 0 -3px #029aff;
+    text-decoration: underline; 
+}
+
+#tags button.focused {
+    background: #323443;
+    color: #0aff02;
+    box-shadow: inset 0 -3px #0aff02;
+    text-decoration: underline;  
+}
+
+#tags button.urgent {
+    background: #5c6667;
+    color: #ff0000;
+    box-shadow: inset 0 -3px #ff0000;
+    text-decoration: underline;  
+}
+
+#mode {
+    padding: 0 5px;
+    background: #5c6667;
+    color: #fcfcfc;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    /* padding: 0 10px; */
+    color: #ffffff;
+}
+
+#window,
+#workspaces,
+#tags {
+    /* margin: 0 4px; */
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    /* background-color: rgba(43, 48, 59, 0.5); */
+    /* font-family: Comfortaa;
+    font-size: 10px;
+    font-style: italic; */
+    color: #c1c1c1;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    /* background-color: #2ecc71; */
+    /* color: #000000; */
+    color: #9381ff;
+    /* color: #aa43ff; */
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#memory {
+    /* background-color: #9b59b6; */
+    color: #029aff;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#disk {
+    color: #ff086f;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#backlight {
+    /* background-color: #90b1b1; */
+    color: #c1c1c1;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#network.down {
+    /* background-color: #2980b9; */
+    color: #9bfc00;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+#network {
+    color: #fc506e;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+    /* margin-right: 0px;
+    border-radius: 0 10px 10px 0; */
+}
+
+#pulseaudio {
+    /* background-color: #f1c40f; */
+    /* color: #000000; */
+    color: aqua;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#pulseaudio.muted {
+    background-color: #ff0000;
+    color: #c1c1c1;
+}
+
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    /* background-color: #66cc99; */
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    /* background-color: #66cc99; */
+}
+
+#custom-media.custom-vlc {
+    /* background-color: #ffa000; */
+}
+
+#custom-freq {
+    /* background-color: #f0932b; */
+    color: #ffe600;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#custom-temp {
+    /* background-color: #f0932b; */
+    color: #ff8000;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#custom-temp.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    /* background-color: #2980b9; */
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+    /* background-color: #2d3436; */
+    color: #858585;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#idle_inhibitor.activated {
+    /* background-color: #ecf0f1; */
+    /* color: #2d3436; */
+    color: #ffd000;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+#mpd {
+    /* background-color: #66cc99; */
+    /* color: #2a5c45; */
+}
+
+#mpd.disconnected {
+    /* background-color: #f53c3c; */
+}
+
+#mpd.stopped {
+    /* background-color: #90b1b1; */
+}
+
+#mpd.paused {
+    /* background-color: #51a37a; */
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+ #window {  /*HYPRLAND WINDOW  */
+    /* border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px; */
+    font-family: Comfortaa;
+    font-size: 10px;
+    font-style: italic;
+    color: #0aff02;
+    text-decoration: underline; 
+    font-weight: bold;
+}
+#window.focused {
+color: #0aff02;
+}

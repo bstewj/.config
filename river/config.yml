@@ -1,0 +1,213 @@
+col_fg:         &col_fg         "dfdfdfff"
+col_fg_alt:     &col_fg_alt     "777777ff"
+col_fg_caution: &col_fg_caution "bd2c40ff"
+col_fg_alert:   &col_fg_alert   "ff4e4eff"
+col_meter_bg:   &col_meter_bg   "666666aa"
+col_chg:        &col_chg        "dddd77ff"
+col_visible_ws: &col_visible_ws "42429cff"
+
+font_default: &font_default "Fira Sans:size=12"
+
+bg_default: &bg_default {stack: [{background: {color: 81A1C1ff}}, {underline: {size: 4, color: D8DEE9ff}}]}
+
+
+# std_underline: &std_underline {underline: { size: 2, color: c1c1c1ff}} 
+
+# border:
+#     width: 1
+#     color: c1c1c1ff
+#     margin: 7
+
+
+bar:
+  height: 20
+  spacing: 5
+  margin: 7
+  font: *font_default
+  location: top
+  background: 2121211a
+
+  right:
+    # - network:
+    #     name: enp4s0
+    #     content:
+    #       map:
+    #         conditions:
+    #           ~carrier: {empty: {}}
+    #           carrier:
+    #             map:
+    #               default: {string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12, foreground: ffffff66}}
+    #               conditions:
+    #                 state == up && ipv4 != "": {string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12}}
+    # - network:
+    #     name: enp4s0
+    #     poll-interval: 1000
+    #     content:
+    #       map:
+    #         default: {string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12, foreground: ffffff66}}
+    #         conditions:
+    #           state == down: {string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12, foreground: ff0000ff}}
+    #           state == up:
+    #             map:
+    #               default:
+    #                 - string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12}
+    #                 - string: {text: "{ssid} {dl-speed:mb}/{ul-speed:mb} Mb/s"}
+
+    #               conditions:
+    #                 ipv4 == "":
+    #                   - string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12, foreground: ffffff66}
+    #                   - string: {text: "{ssid} {dl-speed:mb}/{ul-speed:mb} Mb/s", foreground: ffffff66}
+    - disk-io:
+        poll-interval: 1000
+        content:
+          map:
+            conditions:
+              device == Total:
+                list:
+                  items:
+                    # - string: {text: "R: ",foreground: ffffffff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: ffffffff}}}
+                    - map:
+                        default: {string: {text: "R: {read_speed} B/s", right-margin: 5, left-margin: 5,foreground: f4e285ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: f4e285ff}}}}
+                        conditions:
+                          read_speed > 1073741824:
+                            string: {text: "R: {read_speed:gib} GB/s", right-margin: 5, left-margin: 5,foreground: 29bf12ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: 29bf12ff}}}
+                          read_speed > 1048576:
+                            string: {text: "R: {read_speed:mib} MB/s", right-margin: 5, left-margin: 5,foreground: 70e000ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: 70e000ff}}}
+                          read_speed > 1024:
+                            string: {text: "R: {read_speed:kib} KB/s", right-margin: 5, left-margin: 5,foreground: 89fc00ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: 89fc00ff}}}
+                    - string: {text: "  "}
+                    # - string: {text: "W: ",foreground: ffffffff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: ffffffff}}}
+                    - map:
+                        default: {string: {text: "W: {write_speed} B/s", right-margin: 5, left-margin: 5,foreground: 26c5f3ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: 26c5f3ff}}}}
+                        conditions:
+                          write_speed > 1073741824:
+                            string: {text: "W: {write_speed:gib} GB/s", right-margin: 5, left-margin: 5,foreground: 8bfa37ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: 8bfa37ff}}}
+                          write_speed > 1048576:
+                            string: {text: "W: {write_speed:mib} MB/s", right-margin: 5, left-margin: 5 ,foreground: fff702ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: fff702ff}}}
+                          write_speed > 1024:
+                            string: {text: "W: {write_speed:kib} KB/s", right-margin: 5, left-margin: 5 ,foreground: d5465cff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: d5465cff}}}
+    - script:
+        path: /home/dmne/.local/bin/temp.sh
+        poll-interval: 250
+        content: # string: { text: "cpu: {cpu}   gpu: {gpu} " ,foreground: 00ffffff,font: "Fira Sans :style=Bold:size=12", deco: {underline: {size: 2, color: 00ffffff}}}}
+           - string: { text: " : {cpu} " ,foreground: affc41ff,font: "Fira Sans :style=Bold:size=12", deco: {underline: {size: 2, color: affc41ff}}}
+           - string: { text: " : {gpu} " ,foreground: ff9770ff,font: "Fira Sans :style=Bold:size=12", deco: {underline: {size: 2, color: ff9770ff}}}
+    - mem:
+        poll-interval: 250
+        content:
+          - string: {text: "{used:mb} MB " , left-margin: 5,foreground: a172fdff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: a172fdff}}}
+          - string: {foreground: ffee32ff,   text: "RAM {percent_used}%", right-margin: 5 ,font: "Fira Sans :style=Bold:size=12", deco: {underline: {size: 2, color: ffee32ff}}}
+    - cpu:
+        poll-interval: 350
+        content:
+          map:
+            conditions:
+              id < 0:
+                # - string: {text: , font: Ubuntu Nerd Font:style=Bold:size=12 , foreground: 0496ffff, deco: {underline: {size: 2, color: 0496ffff}}}
+                - string: {text: "   {cpu}%", right-margin: 5, left-margin: 5, font: "Fira Sans :style=Bold:size=12", foreground: 0496ffff, deco: {underline: {size: 2, color: 0496ffff}}}
+    - network:
+          name: enp4s0
+          poll-interval: 250
+          content:
+            - string: {text: "{ssid}󰶹 {dl-speed:mb}",font: "Fira Sans :style=Bold:size=12", foreground: 000000ff , right-margin: 5 , left-margin: 5 , deco: {background:  {color: 05ff00ff}}}
+            - string: {text: "󰶼 {ul-speed:mb}", font: "Fira Sans :style=Bold:size=12",foreground: 000000ff, right-margin: 5 , left-margin: 5 , deco: {background:  {color: ff8000ff}}}
+      
+             
+    - pipewire:
+        anchors:
+          volume: &volume
+            conditions:
+              muted: {string: {text: "{linear_volume}%", right-margin: 5, foreground: ff0000ff,font: "Fira Sans :style=Bold:size=12" , deco: {underline: {size: 2, color: ff0000ff}}}}
+              ~muted: {string: {text: "{linear_volume}%", right-margin: 5,font: "Fira Sans :style=Bold:size=12", foreground: 00ffffff , deco: {underline: {size: 2, color: 00ffffff}}}}
+        content:
+          list:
+            items:
+              - map:
+                  conditions:
+                    type == "sink":
+                      map:
+                        conditions:
+                          icon == "audio-headset-bluetooth":
+                            string: {text: "󰋋"}
+                        default:
+                          - ramp:
+                              tag: linear_volume
+                              items:
+                                - string: {text: " ",font: "Ubuntu Nerd Font:style=Bold:size=12", foreground: 00ffffff , deco: {underline: {size: 2, color: 00ffffff}}}
+                                - string: {text: " ",font: "Ubuntu Nerd Font:style=Bold:size=12", foreground: 00ffffff , deco: {underline: {size: 2, color: 00ffffff}}}
+                                - string: {text: " ",font: "Ubuntu Nerd Font:style=Bold:size=12", foreground: 00ffffff , deco: {underline: {size: 2, color: 00ffffff}}}
+                    type == "source":
+                      - string: {text: " ",font: "Ubuntu Nerd Font:style=Bold:size=12", foreground: 00ffffff , deco: {underline: {size: 2, color: 00ffffff}}}
+              - map:
+                  <<: *volume        
+    - label:
+        content:
+          string: {text: " ",font: "Ubuntu Nerd Font:style=Bold:size=12",foreground: ff0000ff, on-click: archlinux-logout , right-margin: 5 , deco: {underline: {size: 2, color: ff0000ff}}} #ff0000ff
+            # on-click: archlinux-logout
+            # on-click: systemctl poweroff
+            # text: 
+        #  - string: foreground: c1c1c1ff
+            # font: "Ubuntu Nerd Font:style=Bold:size=12"  
+##### CENTER MODULE ########                
+  center:
+    - clock:
+        time-format: "%a %b %d %H:%M:%S"
+        content:
+          string: {text: "{time}" , right-margin: 5 , left-margin: 5 ,font: "Fira Sans :style=Bold:size=12", foreground: c1c1c1ff , deco: {underline: {size: 2, color: c1c1c1ff }}}
+ 
+##### RIVER WM WORKSPACES
+  left:
+    - river:
+        anchors:
+          - base: &river_base
+              left-margin: 10
+              right-margin: 13 
+              default: {string: {text: , font: *hack}}
+              conditions:
+                id == 1: {string: {text: ﳐ, font: *hack}}  
+                id == 2: {string: {text: , font: *hack}}  
+                id == 3: {string: {text: , font: *hack}}  
+                id == 4: {string: {text: , font: *hack}}  
+                id == 5: {string: {text: , font: *hack}}  
+                id == 10: {string: {text: "scratchpad", font: *hack}}  
+                id == 11: {string: {text: "work", font: *hack}}  
+
+        content:
+          map:
+            on-click: 
+              left: sh -c "riverctl set-focused-tags $((1 << ({id} - 1)))"
+              right: sh -c "riverctl toggle-focused-tags $((1 << ({id} -1)))"
+              middle: sh -c "riverctl toggle-view-tags $((1 << ({id} -1)))"
+            conditions:
+              state == urgent:
+                map:
+                  <<: *river_base
+                  deco: {background: {color: D08770ff}}
+              state == focused:
+                map:
+                  <<: *river_base
+                  deco: *bg_default
+              state == visible && ~occupied:
+                map:
+                  <<: *river_base
+              state == visible && occupied:
+                map:
+                  <<: *river_base
+                  deco: *bg_default
+              state == unfocused:
+                map:
+                  <<: *river_base
+              state == invisible && ~occupied: {empty: {}}
+              state == invisible && occupied:
+                map:
+                  <<: *river_base
+                  deco: {underline: {size: 3, color: ea6962ff}}
+    - foreign-toplevel:
+          content:
+            map:
+              conditions:
+                ~activated: {empty: {}}
+                activated:
+                  - string: {text: "{app-id}: {title}", font: "Fira Sans :style=Bold Italic:size=8", foreground: ff006dff , right-margin: 3 , left-margin: 3, deco: {underline: {size: 2, color: ff006dff}}}
+                  # - string: {text: "{app-id}: {title}"}
+                    # - string: {text: , font: "Ubuntu Nerd Font :style=Bold:size=12"}
